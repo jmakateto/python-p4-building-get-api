@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
+
 from random import randint, choice as rc
+from faker import Faker  
 
-from faker import Faker
+from app import app, db
+from models import Game, Review, User
 
-from app import app
-from models import db, Game, Review, User
 
 genres = [
     "Platformer",
@@ -63,10 +64,12 @@ platforms = [
     "PC",
 ]
 
-fake = Faker()
 
 with app.app_context():
+    
+    db.create_all()
 
+   
     Review.query.delete()
     User.query.delete()
     Game.query.delete()
